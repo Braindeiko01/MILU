@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para el amor de mi vida</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Patrick Hand', cursive;
-      background: linear-gradient(to bottom, #f3e5f5, #e1bee7);
-      color: #9c27b0;
+      background: linear-gradient(to bottom, #e6e6fa, #f3d1f4);
+      color: #b497bd;
       text-align: center;
       overflow-x: hidden;
     }
     header {
       padding: 50px 20px;
-      background: #ce93d8;
+      background: #f3d1f4;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
       font-size: 3em;
       margin: 0;
+      color: #c2185b;
     }
     .heart {
       position: fixed;
       top: -50px;
       font-size: 2em;
       animation: fall 5s linear infinite;
-      color: #e1bee7;
+      color: #e6b2d1;
     }
     @keyframes fall {
       0% {
@@ -46,15 +47,15 @@
     .letter {
       max-width: 600px;
       margin: auto;
-      background: #f8eafa;
+      background: #fff0f7;
       padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);
+      box-shadow: 0 4px 8px rgba(180, 151, 189, 0.3);
     }
     button {
       padding: 10px 20px;
       font-size: 1.2em;
-      background-color: #ba68c8;
+      background-color: #fcbad3;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -63,13 +64,13 @@
       transition: background 0.3s;
     }
     button:hover {
-      background-color: #9c27b0;
+      background-color: #c2185b;
     }
     .surprise {
       display: none;
       margin-top: 20px;
       font-size: 1.5em;
-      color: #6a1b9a;
+      color: #c2185b;
     }
     .imagenes img {
       max-width: 90%;
@@ -81,7 +82,7 @@
 </head>
 <body>
   <header>
-    <h1>Para Mis ojitos preciosos 🥹</h1>
+    <h1>Para Mis ojitos preciosos🥹</h1>
     <p>Piwkenyeyu</p>
   </header>
 
@@ -89,18 +90,13 @@
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
-      <p>
-        Quise hacerte esto para recordarte lo mucho que te amo y lo importante que eres para mí. Desde el día que te conocí te volviste muy importante para mí y te hiciste un espacio en mi corazón que nadie puede reemplazar. Te admiro mucho, eres una persona muy valiosa y hermosa, y no me refiero solo físicamente.
-      </p>
-      <p>
-        Te amo muchísimo y me encantas. Me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷
-      </p>
-      <p>Te amo con todo mi corazón, preciosa</p>
-      <p>Con amor</p>
+      <p>Quise hacerte esto para recordarte lo mucho que te amo y lo importante que eres para mí.
+        Desde el día que te conocí te volviste muy importante para mí y te hiciste un espacio en mi corazón que nadie puede reemplazar. Te admiro mucho, eres una persona muy valiosa y hermosa, y no me refiero solo físicamente.</p>
+      <p>Te amo muchísimo y me encantas. Me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷</p>
+      <p>Te amo con todo mi corazón preciosa</p>
+      <p>Con amor,</p>
       <p>Tu bebé chiquito 🥰</p>
     </div>
-
-    <audio id="musica" src="https://docs.google.com/uc?export=download&id=1KcgWiTLt_LRQUSD6Y7p8lwLIA0ukCWo-"></audio>
 
     <button onclick="mostrarSorpresa()">Tocá si me amas 💕</button>
 
@@ -109,16 +105,17 @@
     </div>
 
     <div class="imagenes" id="imagenes" style="display: none;">
-      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" alt="Foto especial" />
+      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" alt="Foto romántica">
     </div>
+
+    <audio id="musica" src="https://drive.google.com/uc?export=download&id=1KcgWiTLt_LRQUSD6Y7p8lwLIA0ukCWo-" loop></audio>
   </div>
 
   <script>
     function mostrarSorpresa() {
       document.getElementById('sorpresa').style.display = 'block';
       document.getElementById('imagenes').style.display = 'block';
-      const musica = document.getElementById('musica');
-      musica.play();
+      document.getElementById('musica').play();
     }
 
     function crearCorazon() {
