@@ -9,14 +9,14 @@
     body {
       margin: 0;
       font-family: 'Patrick Hand', cursive;
-      background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
-      color: #ff69b4;
+      background: linear-gradient(to bottom, #e6e6fa, #f3e8ff);
+      color: #7b4fa3;
       text-align: center;
       overflow-x: hidden;
     }
     header {
       padding: 50px 20px;
-      background: #ffccdd;
+      background: #d9c2f0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     h1 {
@@ -28,7 +28,7 @@
       top: -50px;
       font-size: 2em;
       animation: fall 5s linear infinite;
-      color: pink;
+      color: #dda0dd;
     }
     @keyframes fall {
       0% { top: -50px; opacity: 1; }
@@ -40,15 +40,15 @@
     .letter {
       max-width: 600px;
       margin: auto;
-      background: #fffafc;
+      background: #f8f4ff;
       padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+      box-shadow: 0 4px 8px rgba(138, 43, 226, 0.2);
     }
     button {
       padding: 10px 20px;
       font-size: 1.2em;
-      background-color: #ffb6c1;
+      background-color: #cda4de;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -57,13 +57,13 @@
       transition: background 0.3s;
     }
     button:hover {
-      background-color: #ff69b4;
+      background-color: #a678b2;
     }
     .surprise {
       display: none;
       margin-top: 20px;
       font-size: 1.5em;
-      color: #d63384;
+      color: #9c27b0;
     }
   </style>
 </head>
@@ -78,13 +78,13 @@
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
       <p>Quise hacerte esto para recordarte lo mucho que te amo y lo importante que eres para mí.
-        Desde el dia que te conoci te volviste muy importante para mi y te hiciste un espacio en mi corazon que nadie puede remplazar, te admiro mucho eres una persona muy valiosa y hermosa y no me refiero a solo fisicamente.</p>
-      <p>Te amo muchisimo y me encantas, me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷</p>
-      <p>Te amo con todo mi corazon preciosa</p>
+        Desde el día que te conocí te volviste muy importante para mí y te hiciste un espacio en mi corazón que nadie puede reemplazar, te admiro mucho, eres una persona muy valiosa y hermosa y no me refiero solo físicamente.</p>
+      <p>Te amo muchísimo y me encantas, me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷</p>
+      <p>Te amo con todo mi corazón preciosa</p>
       <p>Con amor</p>
-      <p>Tu bebe chiquito 🥰</p>
+      <p>Tu bebé chiquito 🥰</p>
     </div>
-    <button onclick="mostrarSorpresa()">tocá si me amas 💕</button>
+    <button onclick="mostrarSorpresa()">Tocá si me amas 💕</button>
     <div class="surprise" id="sorpresa">
       🎁 Yo te amo muchisisisisisimooo maaaas, y deja de dejarme en visto o cuando te vea me vas a deber unos cuantos abrazos y besos 🥺.
     </div>
@@ -98,7 +98,7 @@
     function crearCorazon() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.textContent = '❤️‍🩹';
+      heart.textContent = '💜';
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = 3 + Math.random() * 2 + 's';
       document.body.appendChild(heart);
