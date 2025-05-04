@@ -71,6 +71,7 @@
       margin-top: 20px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;  /* Añadido para mostrar que se puede tocar */
     }
   </style>
 </head>
@@ -84,12 +85,11 @@
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
-      <p>Quise escribirte esto para recordarte lo mucho que te amo y lo importante que eres para mí. Desde el día en que te conocí, encontraste un lugar en mi corazón que nadie más podrá ocupar. Te has vuelto una parte esencial de mi vida.</p>
-      <p>Te admiro profundamente. Eres una persona valiosa y hermosa, y no lo digo solo por tu apariencia aunque también lo seas, sino por lo increíble que eres por dentro.
-       Me encantas. Me gustas por tantas razones: por tus expresiones tan graciosas, por tu ternura, por la forma en que eres tan tú. Me encanta que seas sincera, que me hagas sentir que contigo puedo hablar de cualquier cosa. Me inspiras, me motivas a ser una mejor versión de mí, y me haces soñar con un futuro contigo.</p>
+      <p>Quise hacerte esto para recordarte lo mucho que te amo y lo importante que eres para mí.
+        Desde el día que te conocí te volviste muy importante para mí y te hiciste un espacio en mi corazón que nadie puede reemplazar. Te admiro mucho, eres una persona muy valiosa y hermosa, y no me refiero solo físicamente.</p>
+      <p>Te amo muchísimo y me encantas. Me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷</p>
       <p>Te amo con todo mi corazón preciosa</p>
-     </p>Eres la mujer con la que sueño estar. 🌷</p>
-      <p>Con amor</p>
+      <p>Con amor,</p>
       <p>Tu bebé chiquito 🥰</p>
     </div>
 
@@ -100,7 +100,8 @@
     </div>
 
     <div class="imagenes" id="imagenes" style="display: none;">
-      <img src='https://i.postimg.cc/q6zWPzqc/IMG-20240115-WA0067-1.jpg' border='0' alt='IMG-20240115-WA0067-1'/></a>" 
+      <!-- Imagen inicial -->
+      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" alt="Foto romántica" onclick="cambiarImagen()">
     </div>
 
     <audio id="musica" src="https://media.vocaroo.com/mp3/1aoxmtEh9ETI" loop></audio>
@@ -111,6 +112,12 @@
       document.getElementById('sorpresa').style.display = 'block';
       document.getElementById('imagenes').style.display = 'block';
       document.getElementById('musica').play();
+    }
+
+    function cambiarImagen() {
+      // Cambiar la imagen al hacer clic
+      const imagen = document.querySelector('.imagenes img');
+      imagen.src = "https://drive.google.com/uc?export=view&id=1KcgWiTLt_LRQUSD6Y7p8lwLIA0ukCWo-"; // Nueva imagen
     }
 
     function crearCorazon() {
