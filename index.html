@@ -108,14 +108,14 @@
 
     <div class="imagenes" id="imagenes" style="display: block;">
       <!-- Imagen inicial -->
-      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" onclick="cambiarImagen()">
+      <img src="https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg" border='0' onclick="cambiarImagen()">
     </div>
 
     <!-- Video oculto inicialmente -->
-    <video id="video" controls>
+    <iframe id="video" >
       <source src="https://drive.google.com/uc?export=view&id=1WQOpsxmnNXV5Umv-Cxh6VHpJgEtiIKjH" type="video/mp4">
       Tu navegador no soporta este formato de video.
-    </video>
+    </iframe>
 
     <audio id="musica" src="https://media.vocaroo.com/mp3/1aoxmtEh9ETI" loop></audio>
   </div>
@@ -132,7 +132,9 @@
     function cambiarImagen() {
       // Cambiar la imagen al hacer clic
       const imagen = document.querySelector('.imagenes img');
-      imagen.src = "https://drive.google.com/uc?export=view&id=1y5XWyhBgCGNCIadT5iI2fLCNhHdxIG7t"; // Nueva imagen
+      imagen.src = "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg" border='0' > // Nueva imagen
+      imagen.src = "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg" border='0'>
+      Imagen.src = "https://i.postimg.cc/d1LRNb6Q/20240207-150646.jpg" border='0'>  
     }
 
     function crearCorazon() {
