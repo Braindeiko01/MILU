@@ -73,6 +73,13 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       cursor: pointer;  /* Añadido para mostrar que se puede tocar */
     }
+    video {
+      max-width: 80%;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;  /* Inicialmente oculto */
+    }
   </style>
 </head>
 <body>
@@ -99,10 +106,16 @@
       🎁 Yo te amo muchisisisisisimooo maaaas, y deja de dejarme en visto o cuando te vea me vas a deber unos cuantos abrazos y besos 🥺.
     </div>
 
-    <div class="imagenes" id="imagenes" style="display: none;">
+    <div class="imagenes" id="imagenes" style="display: block;">
       <!-- Imagen inicial -->
-      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" alt="Foto romántica" onclick="cambiarImagen()">
+      <img src="https://drive.google.com/uc?export=view&id=1QV_axJWDZt3Lv0g8a37a1p4meRefV79j" onclick="cambiarImagen()">
     </div>
+
+    <!-- Video oculto inicialmente -->
+    <video id="video" controls>
+      <source src="https://drive.google.com/uc?export=view&id=1WQOpsxmnNXV5Umv-Cxh6VHpJgEtiIKjH" type="video/mp4">
+      Tu navegador no soporta este formato de video.
+    </video>
 
     <audio id="musica" src="https://media.vocaroo.com/mp3/1aoxmtEh9ETI" loop></audio>
   </div>
@@ -112,12 +125,14 @@
       document.getElementById('sorpresa').style.display = 'block';
       document.getElementById('imagenes').style.display = 'block';
       document.getElementById('musica').play();
+      document.getElementById('video').style.display = 'block'; // Mostrar el video
+      document.getElementById('video').play();  // Reproducir el video automáticamente
     }
 
     function cambiarImagen() {
       // Cambiar la imagen al hacer clic
       const imagen = document.querySelector('.imagenes img');
-      imagen.src = "https://drive.google.com/uc?export=view&id=1KcgWiTLt_LRQUSD6Y7p8lwLIA0ukCWo-"; // Nueva imagen
+      imagen.src = "https://drive.google.com/uc?export=view&id=1y5XWyhBgCGNCIadT5iI2fLCNhHdxIG7t"; // Nueva imagen
     }
 
     function crearCorazon() {
