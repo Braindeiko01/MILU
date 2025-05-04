@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Mi Amor 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Patrick Hand', cursive;
+      background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
+      color: #ff69b4;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 50px 20px;
+      background: #ffccdd;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    .heart {
+      position: fixed;
+      top: -50px;
+      font-size: 2em;
+      animation: fall 5s linear infinite;
+      color: pink;
+    }
+    @keyframes fall {
+      0% { top: -50px; opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+    .section {
+      padding: 40px 20px;
+    }
+    .letter {
+      max-width: 600px;
+      margin: auto;
+      background: #fffafc;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      color: white;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #ff69b4;
+    }
+    .surprise {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #d63384;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Para Mi Amorcito 💕</h1>
+    <p>Hecho con todo mi corazón 💌</p>
+  </header>
+
+  <div class="section">
+    <h2>Una cartita para ti ✨</h2>
+    <div class="letter">
+      <p>Hola mi amor 💖,</p>
+      <p>Quise hacerte este sitio para recordarte lo mucho que te amo y lo importante que eres para mí. Cada día contigo es un regalo. 🌸</p>
+      <p>Gracias por existir, por tu risa, por tu ternura. Eres lo mejor de mi mundo. 🌷</p>
+      <p>Te amo con todo mi kokoro. 💘</p>
+      <p>Con amor,</p>
+      <p>Tu personita especial 🥰</p>
+    </div>
+    <button onclick="mostrarSorpresa()">Haz clic si me amas 💕</button>
+    <div class="surprise" id="sorpresa">
+      🎁 ¡Sorpresa! Eres mi tesoro más valioso. 💎
+    </div>
+  </div>
+
+  <!-- Corazones flotando -->
+  <script>
+    function mostrarSorpresa() {
+      document.getElementById('sorpresa').style.display = 'block';
+    }
+    function crearCorazon() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(crearCorazon, 500);
+  </script>
+</body>
+</html>
