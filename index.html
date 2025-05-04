@@ -71,14 +71,14 @@
       margin-top: 20px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      cursor: pointer;  /* Añadido para mostrar que se puede tocar */
+      cursor: pointer;
     }
     video {
       max-width: 80%;
       margin-top: 20px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: none;  /* Inicialmente oculto */
+      display: none;
     }
   </style>
 </head>
@@ -92,9 +92,7 @@
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
-      <p>Quise hacerte esto para recordarte lo mucho que te amo y lo importante que eres para mí.
-        Desde el día que te conocí te volviste muy importante para mí y te hiciste un espacio en mi corazón que nadie puede reemplazar. Te admiro mucho, eres una persona muy valiosa y hermosa, y no me refiero solo físicamente.</p>
-      <p>Te amo muchísimo y me encantas. Me gustas mucho por tus expresiones tan graciosas, tu ternura, tu manera de ser, por ser tan sincera, porque siento que contigo puedo hablar de cualquier cosa, porque me inspiras y motivas a ser mejor. Eres la mujer con la que sueño estar. 🌷</p>
+      <p>Quise hacerte esto para recordarte lo mucho que te amo...</p>
       <p>Te amo con todo mi corazón preciosa</p>
       <p>Con amor,</p>
       <p>Tu bebé chiquito 🥰</p>
@@ -106,35 +104,39 @@
       🎁 Yo te amo muchisisisisisimooo maaaas, y deja de dejarme en visto o cuando te vea me vas a deber unos cuantos abrazos y besos 🥺.
     </div>
 
-    <div class="imagenes" id="imagenes" style="display: block;">
-      <!-- Imagen inicial -->
-      <img src="https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg" border='0' onclick="cambiarImagen()">
+    <div class="imagenes" id="imagenes" style="display: none;">
+      <img id="imagen-amor" src="https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg" onclick="cambiarImagen()">
     </div>
 
     <!-- Video oculto inicialmente -->
-    <iframe id="video" >
+    <video id="video" controls>
       <source src="https://drive.google.com/uc?export=view&id=1WQOpsxmnNXV5Umv-Cxh6VHpJgEtiIKjH" type="video/mp4">
       Tu navegador no soporta este formato de video.
-    </iframe>
+    </video>
 
     <audio id="musica" src="https://media.vocaroo.com/mp3/1aoxmtEh9ETI" loop></audio>
   </div>
 
   <script>
+    const imagenes = [
+      "https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg",
+      "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg",
+      "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg",
+      "https://i.postimg.cc/d1LRNb6Q/20240207-150646.jpg"
+    ];
+    let indiceImagen = 0;
+
     function mostrarSorpresa() {
       document.getElementById('sorpresa').style.display = 'block';
       document.getElementById('imagenes').style.display = 'block';
       document.getElementById('musica').play();
-      document.getElementById('video').style.display = 'block'; // Mostrar el video
-      document.getElementById('video').play();  // Reproducir el video automáticamente
+      document.getElementById('video').style.display = 'block';
+      document.getElementById('video').play();
     }
 
     function cambiarImagen() {
-      // Cambiar la imagen al hacer clic
-      const imagen = document.querySelector('.imagenes img');
-      imagen.src = "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg" border='0' > // Nueva imagen
-      imagen.src = "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg" border='0'>
-      Imagen.src = "https://i.postimg.cc/d1LRNb6Q/20240207-150646.jpg" border='0'>  
+      indiceImagen = (indiceImagen + 1) % imagenes.length;
+      document.getElementById('imagen-amor').src = imagenes[indiceImagen];
     }
 
     function crearCorazon() {
