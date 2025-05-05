@@ -530,6 +530,21 @@
       }
     };
 
+    // Detectar cuando el usuario cambia de pestaña o minimiza el navegador
+    document.addEventListener('visibilitychange', function() {
+      const audio = document.getElementById('musica');
+      const control = document.querySelector('.music-control');
+      
+      if (document.hidden) {
+        // El usuario cambió de pestaña o minimizó el navegador
+        audio.pause();
+        control.dataset.playing = "false";
+      } else if (control.dataset.playing === "true") {
+        // El usuario volvió y la música estaba sonando antes
+        audio.play().catch(e => console.log('Error reproduciendo audio:', e));
+      }
+    });
+
     // Función para actualizar el contador
     function actualizarContador() {
       const ahora = new Date();
@@ -689,32 +704,21 @@
       mediaIndex = (mediaIndex - 1 + medios.length) % medios.length;
       mostrarMedia();
     }
-    
-    document.addEventListener('visibilitychange', function() {
-  const audio = document.getElementById('musica');
-  const control = document.querySelector('.music-control');
-  
-  if (document.hidden) {
-    // El usuario cambió de pestaña o minimizó el navegador
-    audio.pause();
-    control.dataset.playing = "false";
-  } else if (control.dataset.playing === "true") {
-    // El usuario volvió y la música estaba sonando antes
-    audio.play().catch(e => console.log('Error reproduciendo audio:', e));
-  }
-    });
+
+    // Controlar música
+    function toggleMusica() {
+      const audio = document.getElementById('musica');
+      const control = document.querySelector('.music-control');
       
-  const audio = document.getElementById('musica');
-  const control = document.querySelector('.music-control');
-  
-  if (audio.paused) {
-    audio.play().catch(e => console.log('Error reproduciendo audio:', e));
-    control.dataset.playing = "true";
-  } else {
-    audio.pause();
-    control.dataset.playing = "false";
-  }
-}
+      if (audio.paused) {
+        audio.play().catch(e => console.log('Error reproduciendo audio:', e));
+        control.dataset.playing = "true";
+      } else {
+        audio.pause();
+        control.dataset.playing = "false";
+      }
+    }
+
     // Crear corazones animados
     function crearCorazon() {
       const heart = document.createElement('div');
@@ -739,7 +743,7 @@
     });
 
     // Generar corazones periódicamente
-    setInterval(crearCorazon, 1);
+    setInterval(crearCorazon, 800);
   </script>
 </body>
 </html>
