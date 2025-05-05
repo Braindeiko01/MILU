@@ -735,7 +735,7 @@
       for(let i = 0; i < 20; i++) {
         setTimeout(() => {
           const heart = document.createElement('div');
-          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
           heart.classList.add('heart-burst');
           heart.style.left = `${40 + Math.random() * 20}%`;
           heart.style.top = `${40 + Math.random() * 20}%`;
@@ -834,7 +834,7 @@
     function crearCorazon() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = 3 + Math.random() * 3 + 's';
       document.querySelector('.floating-hearts').appendChild(heart);
@@ -844,7 +844,7 @@
     // Crear efecto de corazón al hacer clic
     document.addEventListener('click', function(e) {
       const heart = document.createElement('div');
-      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
       heart.classList.add('heart-burst');
       heart.style.left = `${e.pageX}px`;
       heart.style.top = `${e.pageY}px`;
@@ -910,7 +910,7 @@
       for (let i = 0; i < 8; i++) {
         setTimeout(() => {
           const heart = document.createElement('div');
-          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
           heart.classList.add('heart-burst');
           
           // Posicionar aleatoriamente cerca del botón
