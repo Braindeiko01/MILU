@@ -35,10 +35,6 @@
       0% { top: -50px; opacity: 1; }
       100% { top: 110%; opacity: 0; }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
     .section {
       padding: 40px 20px;
     }
@@ -49,6 +45,18 @@
       padding: 20px;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(180, 151, 189, 0.3);
+      animation: openLetter 2s ease;
+      transform-origin: top center;
+    }
+    @keyframes openLetter {
+      0% {
+        transform: rotateX(90deg);
+        opacity: 0;
+      }
+      100% {
+        transform: rotateX(0deg);
+        opacity: 1;
+      }
     }
     button {
       padding: 10px 20px;
@@ -72,16 +80,16 @@
     }
     .media-container {
       display: none;
-      margin-top: 20px;
-      text-align: center;
-      display: flex;
+      margin: 30px auto 0;
       justify-content: center;
       align-items: center;
       height: 400px;
       position: relative;
+      max-width: 90%;
+      flex-direction: column;
     }
     .media-container img, .media-container video {
-      max-width: 80%;
+      max-width: 100%;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       cursor: pointer;
@@ -121,7 +129,7 @@
 
     <div class="media-container" id="mediaContainer">
       <img id="imagen-amor" src="" onclick="siguienteMedia()">
-      <video id="video-amor" autoplay loop onclick="siguienteMedia()">
+      <video id="video-amor" autoplay loop muted onclick="siguienteMedia()">
         <source src="" type="video/mp4">
         Tu navegador no soporta video.
       </video>
@@ -142,7 +150,7 @@
 
     const videos = [
       "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240112-WA0095.mp4",
-      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-VID-20240202-WA0013.mp4.mp4"
+      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240202-WA0013.mp4.mp4.mp4"
     ];
 
     let mediaIndex = 0;
@@ -162,20 +170,18 @@
       img.classList.remove('mostrar');
       video.classList.remove('mostrar');
 
-      if (mostrandoImagenes) {
-        img.src = imagenes[mediaIndex];
-        video.pause();
-        setTimeout(() => {
+      setTimeout(() => {
+        if (mostrandoImagenes) {
+          img.src = imagenes[mediaIndex];
+          video.pause();
           img.classList.add('mostrar');
-        }, 50);
-      } else {
-        video.src = videos[mediaIndex];
-        video.load();
-        setTimeout(() => {
+        } else {
+          video.src = videos[mediaIndex];
+          video.load();
           video.classList.add('mostrar');
           video.play();
-        }, 50);
-      }
+        }
+      }, 300);
     }
 
     function siguienteMedia() {
@@ -204,4 +210,3 @@
   </script>
 </body>
 </html>
-
