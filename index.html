@@ -73,9 +73,10 @@
     .media-container {
       display: none;
       margin-top: 20px;
+      text-align: center; /* Centrar el contenido */
     }
     .media-container img, .media-container video {
-      max-width: 90%;
+      max-width: 80%;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       animation: fadeIn 0.5s ease-in-out;
@@ -110,30 +111,25 @@
 
     <div class="media-container" id="mediaContainer">
       <img id="imagen-amor" src="" onclick="siguienteMedia()" style="display: none;">
-      <video id="video-amor" controls autoplay loop onclick="siguienteMedia()">
+      <video id="video-amor" autoplay loop onclick="siguienteMedia()">
         <source src="" type="video/mp4">
         Tu navegador no soporta video.
       </video>
     </div>
 
-    <audio id="musica" src="https://raw.githubusercontent.com/Braindeiko01/MILU/refs/heads/main/MILO%20J%20-%20M.A.I%20(Video%20Oficial).mp3" loop autoplay></audio>
+    <audio id="musica" src="https://raw.githubusercontent.com/Braindeiko01/MILU/refs/heads/main/MILO%20J%20-%20M.A.I%20(Video%20Oficial).mp3" loop playsinline></audio>
   </div>
 
   <script>
     const imagenes = [
       "https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg",
-      "https://i.postimg.cc/d1LRNb6Q/20240207-150646.jpg",
-      "https://i.postimg.cc/jq69HND8/VID-20240124-WA0032-exported-366.jpg",
-      "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg",
       "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg",
-      "https://i.postimg.cc/Kj5HmSXX/Screenshot-20250420-171620-3.png",
-      
-      
+      "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg"
     ];
 
     const videos = [
       "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240112-WA0095.mp4",
-      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240202-WA0013.mp4"
+      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240124-WA0032.mp4"
     ];
 
     let mediaIndex = 0;
