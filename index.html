@@ -77,6 +77,11 @@
       margin-top: 20px;
       font-size: 1.5em;
       color: #c2185b;
+      animation: fadeIn 2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
     .media-container {
       position: relative;
@@ -86,6 +91,7 @@
       align-items: center;
       flex-direction: column;
       width: 80%;
+      display: none;
     }
     .media-container img, .media-container video {
       max-width: 100%;
@@ -98,9 +104,13 @@
     }
     .mostrar {
       opacity: 1 !important;
+      display: block !important;
     }
     video {
-      display: block;
+      display: none;
+    }
+    .audio-control {
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -114,22 +124,27 @@
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
-      <p>Quise escribirte estas palabras para recordarte cuánto te amo y lo importante que eres para mí.</p>
-      <p>Te admiro profundamente. Eres una mujer valiosa, única y hermosa...</p>
-      <p>Eres la mujer con la que quiero compartir mis días, mis metas, y mi amor.</p>
+      <p>Quise escribirte estas palabras para recordarte cuánto te amo y lo importante que eres para mí.
+        Desde el primer día en que te conocí, ocupaste un lugar en mi corazón que nadie más podría llenar, te volviste esencial en mi vida.</p>
+      <p>Te admiro profundamente. Eres una mujer valiosa, única y hermosa, y no me refiero solo a tu belleza exterior que es evidente, sino a todo lo que eres por dentro: tu nobleza, tu forma de pensar, tu manera de amar.
+        Me encantas en todos los sentidos. Me gustas por tus expresiones tan graciosas, por tu ternura, por esa forma tan especial que tienes de ser tú misma. Me fascina tu sinceridad, la confianza que me das, y el hecho de que contigo puedo hablar de todo, sin miedo ni filtros.</p>
+      <p>Tú me inspiras. Me das fuerzas para ser mejor cada día, y me haces soñar con un futuro a tu lado, aun con toda la distancia que nos separa mi corazón es solo tuyo, nadie más puede tenerlo.</p>
+      <p>Eres, sin duda, la mujer con la que quiero compartir mis días, mis metas, y mi amor.</p>
       <p>Eres la mujer con la que sueño estar. 🌷</p>
       <p>Con amor,</p>
       <p>Tu bebé chiquito 🥰</p>
     </div>
     <button onclick="mostrarSorpresa()">Tocá si me amas 🥺</button>
-
+    <div class="audio-control">
+      <button onclick="toggleMusica()">🎵 Pausar/Reproducir música</button>
+    </div>
     <div class="surprise" id="sorpresa">
       🎁 Yo te amo muchisisisisisimooo maaaas, y deja de dejarme en visto o cuando te vea me vas a deber unos cuantos abrazos y besos 🥺.
     </div>
 
     <div class="media-container" id="mediaContainer">
       <img id="imagen-amor" src="" onclick="siguienteMedia()">
-      <video id="video-amor" autoplay loop muted onclick="siguienteMedia()">
+      <video id="video-amor" onclick="siguienteMedia()">
         <source src="" type="video/mp4">
         Tu navegador no soporta video.
       </video>
@@ -160,7 +175,8 @@
 
     function mostrarSorpresa() {
       document.getElementById('sorpresa').style.display = 'block';
-      document.getElementById('mediaContainer').style.display = 'flex';
+      const container = document.getElementById('mediaContainer');
+      container.style.display = 'flex';
       document.getElementById('musica').play();
       mostrarMedia();
     }
@@ -171,6 +187,7 @@
 
       img.classList.remove('mostrar');
       video.classList.remove('mostrar');
+      video.style.display = 'none';
 
       setTimeout(() => {
         if (mostrandoImagenes) {
@@ -178,10 +195,13 @@
           img.classList.add('mostrar');
           video.pause();
           video.src = "";
-          intervalo = setTimeout(siguienteMedia, 2000);
+          intervalo = setTimeout(siguienteMedia, 3000);
         } else {
+          img.src = "";
+          img.classList.remove('mostrar');
           video.src = videos[mediaIndex];
           video.classList.add('mostrar');
+          video.style.display = 'block';
           video.onended = siguienteMedia;
           video.play();
         }
@@ -202,6 +222,15 @@
       mostrarMedia();
     }
 
+    function toggleMusica() {
+      const musica = document.getElementById('musica');
+      if (musica.paused) {
+        musica.play();
+      } else {
+        musica.pause();
+      }
+    }
+
     function crearCorazon() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
@@ -220,4 +249,3 @@
   </script>
 </body>
 </html>
-
