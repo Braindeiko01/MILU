@@ -79,13 +79,12 @@
       color: #c2185b;
     }
     .media-container {
-      display: none;
+      position: relative;
+      height: 400px;
+      overflow: hidden;
       margin: 30px auto 0;
       justify-content: center;
       align-items: center;
-      height: 400px;
-      position: relative;
-      max-width: 90%;
       flex-direction: column;
     }
     .media-container img, .media-container video {
@@ -96,6 +95,8 @@
       opacity: 0;
       transition: opacity 1s ease;
       position: absolute;
+      top: 0;
+      left: 0;
     }
     .mostrar {
       opacity: 1 !important;
@@ -114,13 +115,17 @@
   <div class="section">
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
-      <p>Hola mi vida ❤️‍🩹,</p>
-      <p>Desde que te conocí, mi mundo es más bonito. Me haces sentir completo, amado y feliz. Gracias por estar conmigo.</p>
-      <p>Me encantas por tu risa, tus gestos, tu forma de amar. Quiero seguir soñando contigo cada día. 🌷</p>
-      <p>Con amor,</p>
+      p>Hola mi vida ❤️‍🩹,</p>
+      <p>Quise escribirte estas palabras para recordarte cuánto te amo y lo importante que eres para mí.
+        Desde el primer día en que te conocí, ocupaste un lugar en mi corazón que nadie más podría llenar, te volviste esencial en mi vida.</p>
+      Te admiro profundamente. Eres una mujer valiosa, única y hermosa, y no me refiero solo a tu belleza exterior que es evidente, sino a todo lo que eres por dentro: tu nobleza, tu forma de pensar, tu manera de amar.
+       Me encantas en todos los sentidos. Me gustas por tus expresiones tan graciosas, por tu ternura, por esa forma tan especial que tienes de ser tú misma. Me fascina tu sinceridad, la confianza que me das, y el hecho de que contigo puedo hablar de todo, sin miedo ni filtros.
+      Tú me inspiras. Me das fuerzas para ser mejor cada día, y me haces soñar con un futuro a tu lado, aun con toda la distancia que nos separa mi corazon es solo tuyo nadie mas puede tenerlo.
+      Eres, sin duda, la mujer con la que quiero compartir mis días, mis metas, y mi amor.<p>
+      </p>Eres la mujer con la que sueño estar. 🌷<p>
+      </p> Con amor<p>
       <p>Tu bebé chiquito 🥰</p>
     </div>
-
     <button onclick="mostrarSorpresa()">Tocá si me amas 🥺</button>
 
     <div class="surprise" id="sorpresa">
@@ -155,6 +160,7 @@
 
     let mediaIndex = 0;
     let mostrandoImagenes = true;
+    let intervalo;
 
     function mostrarSorpresa() {
       document.getElementById('sorpresa').style.display = 'block';
@@ -173,18 +179,22 @@
       setTimeout(() => {
         if (mostrandoImagenes) {
           img.src = imagenes[mediaIndex];
-          video.pause();
           img.classList.add('mostrar');
+          video.pause();
+          video.src = "";
+          intervalo = setTimeout(siguienteMedia, 4000);
         } else {
           video.src = videos[mediaIndex];
-          video.load();
           video.classList.add('mostrar');
+          video.onended = siguienteMedia;
           video.play();
         }
       }, 300);
     }
 
     function siguienteMedia() {
+      clearTimeout(intervalo);
+
       const total = mostrandoImagenes ? imagenes.length : videos.length;
       mediaIndex++;
 
