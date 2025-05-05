@@ -181,8 +181,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background-color: #000;
+      object-fit: cover;
       opacity: 0;
       transition: opacity 1s ease, transform 1s ease;
       border-radius: 20px;
@@ -736,7 +735,7 @@
       for(let i = 0; i < 20; i++) {
         setTimeout(() => {
           const heart = document.createElement('div');
-          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)]; // Corregido: limitado a 2 elementos
+          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
           heart.classList.add('heart-burst');
           heart.style.left = `${40 + Math.random() * 20}%`;
           heart.style.top = `${40 + Math.random() * 20}%`;
@@ -759,4 +758,220 @@
       // Mostrar el primer medio
       mostrarMedia();
       
-      //
+      // Iniciar reproducción automática
+      if (reproduccionAutomatica) {
+        clearInterval(intervalo);
+        intervalo = setInterval(siguienteMedia, medios[mediaIndex].tipo === 'video' ? 10000 : 4000);
+      }
+    }
+
+    // Mostrar media actual
+    function mostrarMedia() {
+      // Ocultar todos los medios
+      for(let i = 0; i < medios.length; i++) {
+        const media = document.getElementById(`media-${i}`);
+        media.classList.remove('mostrar');
+        if (media.tagName === 'VIDEO') {
+          media.pause();
+        }
+      }
+      
+      // Mostrar el medio actual
+      const mediaElement = document.getElementById(`media-${mediaIndex}`);
+      mediaElement.classList.add('mostrar');
+      
+      // Si es video, reproducirlo
+      if (mediaElement.tagName === 'VIDEO') {
+        mediaElement.currentTime = 0;
+        mediaElement.play().catch(e => console.log('Error reproduciendo video:', e));
+      }
+      
+      // Mostrar leyenda
+      const caption = document.getElementById('mediaCaption');
+      caption.textContent = medios[mediaIndex].caption;
+      caption.style.opacity = '1';
+      setTimeout(() => {
+        caption.style.opacity = '0';
+      }, 3000);
+      
+      // Actualizar indicadores
+      actualizarIndicadores();
+      
+      // Reiniciar intervalo si está en modo automático
+      if (reproduccionAutomatica) {
+        clearInterval(intervalo);
+        intervalo = setInterval(siguienteMedia, medios[mediaIndex].tipo === 'video' ? 10000 : 4000);
+      }
+    }
+
+    // Siguiente media
+    function siguienteMedia() {
+      mediaIndex = (mediaIndex + 1) % medios.length;
+      mostrarMedia();
+    }
+
+    // Media anterior
+    function anteriorMedia() {
+      mediaIndex = (mediaIndex - 1 + medios.length) % medios.length;
+      mostrarMedia();
+    }
+
+    // Controlar música
+    function toggleMusica() {
+      const audio = document.getElementById('musica');
+      const control = document.querySelector('.music-control');
+      
+      if (audio.paused) {
+        audio.play().catch(e => console.log('Error reproduciendo audio:', e));
+        control.dataset.playing = "true";
+      } else {
+        audio.pause();
+        control.dataset.playing = "false";
+      }
+    }
+
+    // Crear corazones animados
+    function crearCorazon() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+      document.querySelector('.floating-hearts').appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    // Crear efecto de corazón al hacer clic
+    document.addEventListener('click', function(e) {
+      const heart = document.createElement('div');
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+      heart.classList.add('heart-burst');
+      heart.style.left = `${e.pageX}px`;
+      heart.style.top = `${e.pageY}px`;
+      document.body.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    // Generar corazones periódicamente
+    setInterval(crearCorazon, 800);
+    
+    // Sistema de mensajes
+    function enviarMensaje() {
+      const input = document.getElementById('messageInput');
+      const mensaje = input.value.trim();
+      
+      if (mensaje.length === 0) {
+        // Animar el input para indicar que debe escribir algo
+        input.style.borderColor = '#ff0066';
+        setTimeout(() => {
+          input.style.borderColor = '#fcbad3';
+        }, 800);
+        return;
+      }
+      
+      // Ocultar mensaje de no hay mensajes
+      document.getElementById('noMessages').style.display = 'none';
+      
+      // Crear el elemento de mensaje
+      const mensajeElement = document.createElement('div');
+      mensajeElement.classList.add('message-bubble');
+      
+      // Obtener fecha y hora actuales
+      const ahora = new Date();
+      const opciones = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+      const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
+      
+      // Agregar contenido
+      mensajeElement.innerHTML = `
+        <div class="message-content">${mensaje}</div>
+        <div class="message-date">${fechaFormateada}</div>
+      `;
+      
+      // Añadir al contenedor
+      const container = document.getElementById('messagesContainer');
+      container.prepend(mensajeElement);
+      
+      // Animar aparición
+      setTimeout(() => {
+        mensajeElement.classList.add('show');
+      }, 100);
+      
+      // Limpiar el input
+      input.value = '';
+      
+      // Crear efecto de corazones
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 1)];
+          heart.classList.add('heart-burst');
+          
+          // Posicionar aleatoriamente cerca del botón
+          const rect = document.querySelector('.message-submit').getBoundingClientRect();
+          heart.style.left = `${rect.left + rect.width/2 + (Math.random() * 100 - 50)}px`;
+          heart.style.top = `${rect.top + (Math.random() * 30 - 15)}px`;
+          
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 1000);
+        }, i * 150);
+      }
+      
+      // Guardar en localStorage
+      guardarMensajes();
+    }
+    
+    // Guardar mensajes en localStorage
+    function guardarMensajes() {
+      const container = document.getElementById('messagesContainer');
+      const mensajes = container.innerHTML;
+      try {
+        localStorage.setItem('mensajesDeAmor', mensajes);
+      } catch (error) {
+        console.log('Error guardando mensajes:', error);
+      }
+    }
+    
+    // Cargar mensajes guardados
+    function cargarMensajes() {
+      try {
+        const mensajesGuardados = localStorage.getItem('mensajesDeAmor');
+        if (mensajesGuardados) {
+          document.getElementById('messagesContainer').innerHTML = mensajesGuardados;
+          document.getElementById('noMessages').style.display = 'none';
+          
+          // Animar aparición de mensajes cargados
+          const mensajes = document.querySelectorAll('.message-bubble');
+          mensajes.forEach((msg, index) => {
+            setTimeout(() => {
+              msg.classList.add('show');
+            }, index * 200);
+          });
+        }
+      } catch (error) {
+        console.log('Error cargando mensajes:', error);
+      }
+    }
+    
+    // Permitir enviar con Enter
+    document.getElementById('messageInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        enviarMensaje();
+      }
+    });
+    
+    // Cargar mensajes al iniciar
+    window.addEventListener('DOMContentLoaded', function() {
+      cargarMensajes();
+    });
+  </script>
+</body>
+</html>
+  
