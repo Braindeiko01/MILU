@@ -181,10 +181,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Cambiado de 'cover' a 'contain' para evitar recortes */
       opacity: 0;
       transition: opacity 1s ease, transform 1s ease;
       border-radius: 20px;
+      background-color: rgba(0,0,0,0.05); /* Fondo sutil para imágenes con transparencia */
     }
     .mostrar {
       opacity: 1 !important;
@@ -375,7 +376,6 @@
     audio {
       display: none;
     }
-  
   </style>
 </head>
 <body>
@@ -442,16 +442,6 @@
         <button onclick="siguienteMedia()">▶</button>
       </div>
       <div class="media-indicator" id="mediaIndicator"></div>
-    </div>
-
-    <div class="message-section">
-      <h2>Déjame un mensaje 💌</h2>
-      <textarea class="message-input" placeholder="Escribe un mensaje con amor..." id="messageInput"></textarea>
-      <button class="message-submit" onclick="enviarMensaje()">Enviar</button>
-      
-      <div class="messages-container" id="messagesContainer">
-        <div class="no-messages" id="noMessages">No hay mensajes aún</div>
-      </div>
     </div>
 
     <div class="music-control" data-playing="true" onclick="toggleMusica()"></div>
@@ -619,7 +609,7 @@
       for(let i = 0; i < 20; i++) {
         setTimeout(() => {
           const heart = document.createElement('div');
-          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 5)];
+          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
           heart.classList.add('heart-burst');
           heart.style.left = `${40 + Math.random() * 20}%`;
           heart.style.top = `${40 + Math.random() * 20}%`;
@@ -718,7 +708,7 @@
     function crearCorazon() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 5)];
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = 3 + Math.random() * 3 + 's';
       document.querySelector('.floating-hearts').appendChild(heart);
@@ -728,7 +718,7 @@
     // Crear efecto de corazón al hacer clic
     document.addEventListener('click', function(e) {
       const heart = document.createElement('div');
-      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 5)];
+      heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 2)];
       heart.classList.add('heart-burst');
       heart.style.left = `${e.pageX}px`;
       heart.style.top = `${e.pageY}px`;
@@ -739,122 +729,6 @@
 
     // Generar corazones periódicamente
     setInterval(crearCorazon, 800);
-    
-    // Sistema de mensajes
-    function enviarMensaje() {
-      const input = document.getElementById('messageInput');
-      const mensaje = input.value.trim();
-      
-      if (mensaje.length === 0) {
-        // Animar el input para indicar que debe escribir algo
-        input.style.borderColor = '#ff0066';
-        setTimeout(() => {
-          input.style.borderColor = '#fcbad3';
-        }, 800);
-        return;
-      }
-      
-      // Ocultar mensaje de no hay mensajes
-      document.getElementById('noMessages').style.display = 'none';
-      
-      // Crear el elemento de mensaje
-      const mensajeElement = document.createElement('div');
-      mensajeElement.classList.add('message-bubble');
-      
-      // Obtener fecha y hora actuales
-      const ahora = new Date();
-      const opciones = { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      };
-      const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
-      
-      // Agregar contenido
-      mensajeElement.innerHTML = `
-        <div class="message-content">${mensaje}</div>
-        <div class="message-date">${fechaFormateada}</div>
-      `;
-      
-      // Añadir al contenedor
-      const container = document.getElementById('messagesContainer');
-      container.prepend(mensajeElement);
-      
-      // Animar aparición
-      setTimeout(() => {
-        mensajeElement.classList.add('show');
-      }, 100);
-      
-      // Limpiar el input
-      input.value = '';
-      
-      // Crear efecto de corazones
-      for (let i = 0; i < 8; i++) {
-        setTimeout(() => {
-          const heart = document.createElement('div');
-          heart.innerHTML = ['❤️‍🩹','💗'][Math.floor(Math.random() * 5)];
-          heart.classList.add('heart-burst');
-          
-          // Posicionar aleatoriamente cerca del botón
-          const rect = document.querySelector('.message-submit').getBoundingClientRect();
-          heart.style.left = `${rect.left + rect.width/2 + (Math.random() * 100 - 50)}px`;
-          heart.style.top = `${rect.top + (Math.random() * 30 - 15)}px`;
-          
-          document.body.appendChild(heart);
-          setTimeout(() => heart.remove(), 1000);
-        }, i * 150);
-      }
-      
-      // Guardar en localStorage
-      guardarMensajes();
-    }
-    
-    // Guardar mensajes en localStorage
-    function guardarMensajes() {
-      const container = document.getElementById('messagesContainer');
-      const mensajes = container.innerHTML;
-      try {
-        localStorage.setItem('mensajesDeAmor', mensajes);
-      } catch (error) {
-        console.log('Error guardando mensajes:', error);
-      }
-    }
-    
-    // Cargar mensajes guardados
-    function cargarMensajes() {
-      try {
-        const mensajesGuardados = localStorage.getItem('mensajesDeAmor');
-        if (mensajesGuardados) {
-          document.getElementById('messagesContainer').innerHTML = mensajesGuardados;
-          document.getElementById('noMessages').style.display = 'none';
-          
-          // Animar aparición de mensajes cargados
-          const mensajes = document.querySelectorAll('.message-bubble');
-          mensajes.forEach((msg, index) => {
-            setTimeout(() => {
-              msg.classList.add('show');
-            }, index * 200);
-          });
-        }
-      } catch (error) {
-        console.log('Error cargando mensajes:', error);
-      }
-    }
-    
-    // Permitir enviar con Enter
-    document.getElementById('messageInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        enviarMensaje();
-      }
-    });
-    
-    // Cargar mensajes al iniciar
-    window.addEventListener('DOMContentLoaded', function() {
-      cargarMensajes();
-    });
   </script>
 </body>
 </html>
