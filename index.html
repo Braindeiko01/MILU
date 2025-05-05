@@ -218,6 +218,10 @@
     }
 
     setInterval(crearCorazon, 500);
+     // Detener la música cuando la página se cierra o se cambia de pestaña
+  window.addEventListener('beforeunload', function() {
+    document.getElementById('musica').pause();
+  });}
   </script>
 </body>
 </html>
