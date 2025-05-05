@@ -35,6 +35,10 @@
       0% { top: -50px; opacity: 1; }
       100% { top: 110%; opacity: 0; }
     }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
     .section {
       padding: 40px 20px;
     }
@@ -66,18 +70,18 @@
       font-size: 1.5em;
       color: #c2185b;
     }
-    .imagenes img {
-      max-width: 90%;
+    .media-container {
+      display: none;
       margin-top: 20px;
+    }
+    .media-container img, .media-container video {
+      max-width: 90%;
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease-in-out;
       cursor: pointer;
     }
     video {
-      max-width: 80%;
-      margin-top: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: none;
     }
   </style>
@@ -92,14 +96,9 @@
     <h2>Una cartita para ti ✨</h2>
     <div class="letter">
       <p>Hola mi vida ❤️‍🩹,</p>
-      <p>Quise escribirte estas palabras para recordarte cuánto te amo y lo importante que eres para mí.
-        Desde el primer día en que te conocí, ocupaste un lugar en mi corazón que nadie más podría llenar, te volviste esencial en mi vida.</p>
-     </p>Te admiro profundamente. Eres una mujer valiosa, única y hermosa, y no me refiero solo a tu belleza exterior que es evidente, sino a todo lo que eres por dentro: tu nobleza, tu forma de pensar, tu manera de amar.
-       Me encantas en todos los sentidos. Me gustas por tus expresiones tan graciosas, por tu ternura, por esa forma tan especial que tienes de ser tú misma. Me fascina tu sinceridad, la confianza que me das, y el hecho de que contigo puedo hablar de todo, sin miedo ni filtros.
-      Tú me inspiras. Me das fuerzas para ser mejor cada día, y me haces soñar con un futuro a tu lado.
-      Eres, sin duda, la mujer con la que quiero compartir mis días, mis metas, y mi amor.</p>
-      </p>Eres la mujer con la que sueño estar. 🌷</p>
-      </p> Con amor</p>
+      <p>Desde que te conocí, mi mundo es más bonito. Me haces sentir completo, amado y feliz. Gracias por estar conmigo.</p>
+      <p>Me encantas por tu risa, tus gestos, tu forma de amar. Quiero seguir soñando contigo cada día. 🌷</p>
+      <p>Con amor,</p>
       <p>Tu bebé chiquito 🥰</p>
     </div>
 
@@ -109,43 +108,72 @@
       🎁 Yo te amo muchisisisisisimooo maaaas, y deja de dejarme en visto o cuando te vea me vas a deber unos cuantos abrazos y besos 🥺.
     </div>
 
-    <div class="imagenes" id="imagenes" style="display: none;">
-      <img id="imagen-amor" src="https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg" onclick="cambiarImagen()">
+    <div class="media-container" id="mediaContainer">
+      <img id="imagen-amor" src="" onclick="siguienteMedia()" style="display: none;">
+      <video id="video-amor" controls autoplay loop onclick="siguienteMedia()">
+        <source src="" type="video/mp4">
+        Tu navegador no soporta video.
+      </video>
     </div>
 
-    <!-- Video oculto inicialmente -->
-    <div style="text-align: center;">
-      <video id="video" width="400" style="border: 4px #b497bd; border-radius: 20px; box-shadow: 0 0 15px #b497bd;"  autoplay loop>
-
-      <source src="VID-20240112-WA0095.mp4" type="video/mp4">
-      Tu navegador no soporta este formato de video.
-    </video>
-  </div>
-    <audio id="musica" src="https://raw.githubusercontent.com/Braindeiko01/MILU/refs/heads/main/MILO%20J%20-%20M.A.I%20(Video%20Oficial).mp3" loop playsinline></audio>
+    <audio id="musica" src="https://raw.githubusercontent.com/Braindeiko01/MILU/refs/heads/main/MILO%20J%20-%20M.A.I%20(Video%20Oficial).mp3" loop autoplay></audio>
   </div>
 
   <script>
     const imagenes = [
       "https://i.postimg.cc/yxPBSRzG/IMG-20240115-WA0067-1.jpg",
-      "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg",
-      "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg",
       "https://i.postimg.cc/d1LRNb6Q/20240207-150646.jpg",
       "https://i.postimg.cc/jq69HND8/VID-20240124-WA0032-exported-366.jpg",
-      "https://i.postimg.cc/Kj5HmSXX/Screenshot-20250420-171620-3.png"
+      "https://i.postimg.cc/HLS42YQP/IMG-20240112-WA0013.jpg",
+      "https://i.postimg.cc/qMnwTdTz/20231223-232201.jpg",
+      "https://i.postimg.cc/Kj5HmSXX/Screenshot-20250420-171620-3.png",
+      
+      
     ];
-    let indiceImagen = 0;
+
+    const videos = [
+      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240112-WA0095.mp4",
+      "https://raw.githubusercontent.com/Braindeiko01/MILU/main/VID-20240202-WA0013.mp4"
+    ];
+
+    let mediaIndex = 0;
+    let mostrandoImagenes = true;
 
     function mostrarSorpresa() {
       document.getElementById('sorpresa').style.display = 'block';
-      document.getElementById('imagenes').style.display = 'block';
+      document.getElementById('mediaContainer').style.display = 'block';
       document.getElementById('musica').play();
-      document.getElementById('video').style.display = 'block';
-      document.getElementById('video').play();
+      mostrarMedia();
     }
 
-    function cambiarImagen() {
-      indiceImagen = (indiceImagen + 1) % imagenes.length;
-      document.getElementById('imagen-amor').src = imagenes[indiceImagen];
+    function mostrarMedia() {
+      const img = document.getElementById('imagen-amor');
+      const video = document.getElementById('video-amor');
+
+      img.style.display = 'none';
+      video.style.display = 'none';
+
+      if (mostrandoImagenes) {
+        img.src = imagenes[mediaIndex];
+        img.style.display = 'block';
+      } else {
+        video.src = videos[mediaIndex];
+        video.load();
+        video.style.display = 'block';
+        video.play();
+      }
+    }
+
+    function siguienteMedia() {
+      const total = mostrandoImagenes ? imagenes.length : videos.length;
+      mediaIndex++;
+
+      if (mediaIndex >= total) {
+        mediaIndex = 0;
+        mostrandoImagenes = !mostrandoImagenes; // alternar
+      }
+
+      mostrarMedia();
     }
 
     function crearCorazon() {
